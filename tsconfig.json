@@ -1,0 +1,12 @@
+{
+  // "extends": "@tsconfig/node16/tsconfig.json",
+  "compilerOptions": {
+    "strictNullChecks": true,
+    "noUncheckedIndexedAccess": true,
+    "paths": {
+      "app/*": ["./packages/app/*"],
+      "@my/ui/*": ["./packages/ui/*"]
+    }
+  },
+  "extends": "expo/tsconfig.base"
+}
