@@ -5,9 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "sst dev",
-    "build:sst": "sst build",
+    "build": "sst build",
     "build:tamagui": "yarn workspaces foreach --exclude next-app -pi run build",
-    "build": "npm-run-all build:sst build:tamagui",
     "deploy": "sst deploy",
     "remove": "sst remove",
     "console": "sst console",

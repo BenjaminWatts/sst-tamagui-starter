@@ -51,7 +51,7 @@ const plugins = [
     // experiment - reduced bundle size react-native-web
     useReactNativeWebLite: false,
     shouldExtract: (path) => {
-      if (path.includes(join('packages', 'app'))) {
+      if (path.includes(join('packages', 'app', '@sst-tamagui-starter/core'))) {
         return true
       }
     },

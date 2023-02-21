@@ -8,6 +8,12 @@ import { Provider } from 'app/provider'
 import Head from 'next/head'
 import React, { startTransition } from 'react'
 import type { SolitoAppProps } from 'solito'
+import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
+
+const client = new ApolloClient({
+  uri: '/api/graphql',
+  cache: new InMemoryCache(),
+});
 
 function MyApp({ Component, pageProps }: SolitoAppProps) {
   return (
@@ -28,6 +34,7 @@ function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useRootTheme()
 
   return (
+    <ApolloProvider client={client}>
     <NextThemeProvider
       onChangeTheme={(next) => {
         startTransition(() => {
@@ -39,6 +46,7 @@ function ThemeProvider({ children }: { children: React.ReactNode }) {
         {children}
       </Provider>
     </NextThemeProvider>
+    </ApolloProvider>
   )
 }
 

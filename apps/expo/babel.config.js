@@ -1,8 +1,14 @@
+// const blacklist = require('metro-config/src/defaults/blacklist');
+
 module.exports = function (api) {
   api.cache(true)
   return {
+    // resolver: {
+    //   blacklistRE:  blacklist(['../next/*'])
+    // },
     presets: [['babel-preset-expo', { jsxRuntime: 'automatic' }]],
     plugins: [
+      "inline-dotenv",
       [
         require.resolve('babel-plugin-module-resolver'),
         {

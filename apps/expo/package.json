@@ -17,6 +17,7 @@
     "@react-navigation/native-stack": "^6.7.0",
     "@types/react-native": "^0.70.8",
     "app": "*",
+    "babel-plugin-inline-dotenv": "^1.7.0",
     "babel-plugin-module-resolver": "^4.1.0",
     "expo": "^47.0.12",
     "expo-constants": "^14.0.2",

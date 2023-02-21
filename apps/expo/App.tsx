@@ -3,6 +3,15 @@ import React from 'react'
 import { NativeNavigation } from 'app/navigation/native'
 import { Provider } from 'app/provider'
 import { useFonts } from 'expo-font'
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+
+const API_URL = __DEV__ ? process.env.DEV_API_URL : process.env.PROD_API_URL;
+console.log(`rendering with ${API_URL}`)
+
+const client = new ApolloClient({
+  uri: API_URL,
+  cache: new InMemoryCache(),
+});
 
 export default function App() {
   const [loaded] = useFonts({
@@ -15,8 +24,10 @@ export default function App() {
   }
 
   return (
-    <Provider>
-      <NativeNavigation />
-    </Provider>
+    <ApolloProvider client={client}>
+      <Provider>
+        <NativeNavigation />
+      </Provider>
+    </ApolloProvider>
   )
 }

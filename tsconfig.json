@@ -5,6 +5,7 @@
     "noUncheckedIndexedAccess": true,
     "paths": {
       "app/*": ["./packages/app/*"],
+      "core/*": ["./packages/core/*"],
       "@my/ui/*": ["./packages/ui/*"]
     }
   },
