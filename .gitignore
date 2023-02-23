@@ -12,3 +12,8 @@ node_modules
 .env*.local
 
 .sst.config.*.mjs
+apps/next/yarn-error.log
+.env
+
+.yarn/cache
+apps/next/.yarn
