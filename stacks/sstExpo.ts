@@ -21,7 +21,7 @@ export function SSTExpoStarterStack({ stack }: StackContext) {
 
   const nextSite = new NextjsSite(stack, 'WebApp', {
     path: 'apps/next',
-    buildCommand: "yarn run open-next@latest build", // default
+    buildCommand: "yarn run build", // default
     cdk: {
       server: {
 

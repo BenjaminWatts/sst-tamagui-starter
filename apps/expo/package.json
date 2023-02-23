@@ -4,6 +4,7 @@
   "main": "index.js",
   "private": true,
   "scripts": {
+    "prestart": "cd ../next && rm -rf .next .open-next && cd ../expo",
     "start": "expo start -c",
     "android": "TAMAGUI_TARGET=native yarn expo run:android",
     "ios": "TAMAGUI_TARGET=native yarn expo run:ios",

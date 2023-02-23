@@ -17,3 +17,6 @@ apps/next/yarn-error.log
 
 .yarn/cache
 apps/next/.yarn
+
+node_modules
+

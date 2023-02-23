@@ -1,0 +1,78 @@
+diff --git a/node_modules/iron-session/dist/index.js b/node_modules/iron-session/dist/index.js
+index 70ed008..849d462 100644
+--- a/node_modules/iron-session/dist/index.js
++++ b/node_modules/iron-session/dist/index.js
+@@ -142,7 +142,7 @@ function createGetIronSession(_crypto2, unsealData2, sealData2) {
+ }
+ function addToCookies(cookieValue, res) {
+   var _a;
+-  if ("headers" in res) {
++  if ("headers" in res && "append" in res.headers) {
+     res.headers.append("set-cookie", cookieValue);
+     return;
+   }
+diff --git a/node_modules/iron-session/dist/index.mjs b/node_modules/iron-session/dist/index.mjs
+index 7dc2aef..4da30f9 100644
+--- a/node_modules/iron-session/dist/index.mjs
++++ b/node_modules/iron-session/dist/index.mjs
+@@ -105,7 +105,7 @@ function createGetIronSession(_crypto2, unsealData2, sealData2) {
+ }
+ function addToCookies(cookieValue, res) {
+   var _a;
+-  if ("headers" in res) {
++  if ("headers" in res && "append" in res.headers) {
+     res.headers.append("set-cookie", cookieValue);
+     return;
+   }
+diff --git a/node_modules/iron-session/edge/dist/index.js b/node_modules/iron-session/edge/dist/index.js
+index dc01e9a..b660bd4 100644
+--- a/node_modules/iron-session/edge/dist/index.js
++++ b/node_modules/iron-session/edge/dist/index.js
+@@ -139,7 +139,7 @@ function createGetIronSession(_crypto2, unsealData2, sealData2) {
+ }
+ function addToCookies(cookieValue, res) {
+   var _a;
+-  if ("headers" in res) {
++  if ("headers" in res && "append" in res.headers) {
+     res.headers.append("set-cookie", cookieValue);
+     return;
+   }
+diff --git a/node_modules/iron-session/edge/dist/index.mjs b/node_modules/iron-session/edge/dist/index.mjs
+index a36d79e..02098a2 100644
+--- a/node_modules/iron-session/edge/dist/index.mjs
++++ b/node_modules/iron-session/edge/dist/index.mjs
+@@ -105,7 +105,7 @@ function createGetIronSession(_crypto2, unsealData2, sealData2) {
+ }
+ function addToCookies(cookieValue, res) {
+   var _a;
+-  if ("headers" in res) {
++  if ("headers" in res && "append" in res.headers) {
+     res.headers.append("set-cookie", cookieValue);
+     return;
+   }
+diff --git a/node_modules/iron-session/edge/index.js b/node_modules/iron-session/edge/index.js
+index dc01e9a..b660bd4 100644
+--- a/node_modules/iron-session/edge/index.js
++++ b/node_modules/iron-session/edge/index.js
+@@ -139,7 +139,7 @@ function createGetIronSession(_crypto2, unsealData2, sealData2) {
+ }
+ function addToCookies(cookieValue, res) {
+   var _a;
+-  if ("headers" in res) {
++  if ("headers" in res && "append" in res.headers) {
+     res.headers.append("set-cookie", cookieValue);
+     return;
+   }
+diff --git a/node_modules/iron-session/edge/index.mjs b/node_modules/iron-session/edge/index.mjs
+index a36d79e..02098a2 100644
+--- a/node_modules/iron-session/edge/index.mjs
++++ b/node_modules/iron-session/edge/index.mjs
+@@ -105,7 +105,7 @@ function createGetIronSession(_crypto2, unsealData2, sealData2) {
+ }
+ function addToCookies(cookieValue, res) {
+   var _a;
+-  if ("headers" in res) {
++  if ("headers" in res && "append" in res.headers) {
+     res.headers.append("set-cookie", cookieValue);
+     return;
+   }
