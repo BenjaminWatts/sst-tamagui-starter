@@ -1,5 +1,7 @@
-// pages/admin.tsx
-// import { HomeScreen } from 'app/features/home/screen'
+//aps/next/pages/index.tsx
+
+import { HomeScreen } from 'app/features/home/screen'
+import {LoginScreen} from 'app/features/login/screen'
 import { withIronSessionSsr } from "iron-session/next";
 import { exchangeToken, logout } from 'lib/auth';
 import { sessionOptions } from 'lib/session';
@@ -21,10 +23,16 @@ export const getServerSideProps = withIronSessionSsr(async function ({
 
 export const Home:React.FC<ServerSideProps>  = ({authenticated}) => {
   if(authenticated){
-    return (<p onClick={() => logout()}>Logout</p>)
+    return <HomeScreen
+      logout={logout}
+    />
   }
   else  {
-    return (<a onClick={() => exchangeToken({token: '123', redirect: '/'})}>Login</a>)
+    return <LoginScreen login={() => exchangeToken({
+      token: '123',
+      redirect: '/'
+    })}/>
+    
   }
 }
 

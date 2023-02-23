@@ -1,4 +1,3 @@
-import useSWR from 'swr'
 
 export const exchangeToken = async(options: {
     token: string;

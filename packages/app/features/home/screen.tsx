@@ -5,14 +5,12 @@ import { useLink } from 'solito/link'
 import { useQuery } from '@apollo/client'
 import { RecentPostsDocument } from 'app/g/graphql'
 
+type HomeScreenProps = {
+  logout: () => void
+}
 
-export function HomeScreen() {
-  const linkProps = useLink({
-    href: '/user/nate',
-  })
-
+export const HomeScreen:React.FC<HomeScreenProps> = ({logout}) => {
   const { data, loading, error, refetch } = useQuery(RecentPostsDocument, { variables: {} })
-
   return (
     <YStack f={1} jc="center" ai="center" p="$4" space>
       <YStack space="$4" maw={600}>
@@ -51,8 +49,9 @@ export function HomeScreen() {
       </YStack>
 
       <XStack>
-        <Button {...linkProps}>Link to user</Button>
+        <Button onPress={() => logout()}>Logout</Button>
       </XStack>
+
 
       <SheetDemo />
     </YStack>

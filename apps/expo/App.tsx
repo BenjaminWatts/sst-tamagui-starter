@@ -1,6 +1,8 @@
+///apps.expo.App.tsx
 import 'expo-dev-client'
 import React from 'react'
 import { NativeNavigation } from 'app/navigation/native'
+import {LoginScreen} from 'app/features/login/screen'
 import { Provider } from 'app/provider'
 import { useFonts } from 'expo-font'
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
@@ -14,6 +16,8 @@ const client = new ApolloClient({
 });
 
 export default function App() {
+  const [loggedIn, setLoggedIn] = React.useState(false)
+
   const [loaded] = useFonts({
     Inter: require('@tamagui/font-inter/otf/Inter-Medium.otf'),
     InterBold: require('@tamagui/font-inter/otf/Inter-Bold.otf'),
@@ -26,7 +30,9 @@ export default function App() {
   return (
     <ApolloProvider client={client}>
       <Provider>
-        <NativeNavigation />
+        {loggedIn ? <NativeNavigation
+          logout={() => setLoggedIn(false)}
+        /> : <LoginScreen login={() => setLoggedIn(true)} />}
       </Provider>
     </ApolloProvider>
   )

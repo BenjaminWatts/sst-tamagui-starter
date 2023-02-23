@@ -1,3 +1,5 @@
+//apps/next/pages/api/logout.ts
+
 import { withIronSessionApiRoute } from "iron-session/next";
 import { sessionOptions } from "lib/session";
 import { NextApiRequest, NextApiResponse } from "next";
