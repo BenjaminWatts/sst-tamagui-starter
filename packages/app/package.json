@@ -7,6 +7,7 @@
     "*.css"
   ],
   "dependencies": {
+    "@aws-sdk/client-cognito-identity-provider": "^3.278.0",
     "@my/ui": "*",
     "@tamagui/animations-react-native": "^1.5.17",
     "@tamagui/colors": "^1.5.17",
@@ -14,6 +15,7 @@
     "@tamagui/lucide-icons": "^1.5.17",
     "@tamagui/shorthands": "^1.5.17",
     "@tamagui/themes": "^1.5.17",
+    "email-validator": "^2.0.4",
     "expo-constants": "^14.0.2",
     "expo-linking": "^3.2.3",
     "solito": "^2.3.0"
@@ -21,5 +23,8 @@
   "devDependencies": {
     "@types/react": "^18.0.27",
     "@types/react-native": "^0.70.8"
+  },
+  "scripts": {
+    "format": "npx prettier --write ."
   }
 }

@@ -1,17 +1,22 @@
-import '@tamagui/core/reset.css'
-import '@tamagui/font-inter/css/400.css'
-import '@tamagui/font-inter/css/700.css'
-import 'raf/polyfill'
+import "@tamagui/core/reset.css";
+import "@tamagui/font-inter/css/400.css";
+import "@tamagui/font-inter/css/700.css";
+import "raf/polyfill";
 
-import { NextThemeProvider, useRootTheme } from '@tamagui/next-theme'
-import { Provider } from 'app/provider'
-import Head from 'next/head'
-import React, { startTransition } from 'react'
-import type { SolitoAppProps } from 'solito'
-import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
+import { NextThemeProvider, useRootTheme } from "@tamagui/next-theme";
+import { Provider } from "app/provider";
+import Head from "next/head";
+import React, { startTransition } from "react";
+import type { SolitoAppProps } from "solito";
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  gql,
+} from "@apollo/client";
 
 const client = new ApolloClient({
-  uri: '/api/graphql',
+  uri: "/api/graphql",
   cache: new InMemoryCache(),
 });
 
@@ -27,27 +32,27 @@ function MyApp({ Component, pageProps }: SolitoAppProps) {
         <Component {...pageProps} />
       </ThemeProvider>
     </>
-  )
+  );
 }
 
 function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useRootTheme()
+  const [theme, setTheme] = useRootTheme();
 
   return (
     <ApolloProvider client={client}>
-    <NextThemeProvider
-      onChangeTheme={(next) => {
-        startTransition(() => {
-          setTheme(next)
-        })
-      }}
-    >
-      <Provider disableRootThemeClass defaultTheme={theme}>
-        {children}
-      </Provider>
-    </NextThemeProvider>
+      <NextThemeProvider
+        onChangeTheme={(next) => {
+          startTransition(() => {
+            setTheme(next);
+          });
+        }}
+      >
+        <Provider disableRootThemeClass defaultTheme={theme}>
+          {children}
+        </Provider>
+      </NextThemeProvider>
     </ApolloProvider>
-  )
+  );
 }
 
-export default MyApp
+export default MyApp;

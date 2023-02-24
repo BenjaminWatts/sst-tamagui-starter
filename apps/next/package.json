@@ -8,11 +8,13 @@
     "build": "sst env npx open-next@latest build",
     "start": "next start",
     "serve": "NODE_ENV=production next start --port 8151",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "npx prettier --write ."
   },
   "dependencies": {
     "@apollo/client": "^3.7.9",
     "@as-integrations/next": "^1.2.0",
+    "@southlane/cognito-jwt-verifier": "^0.1.8",
     "@sst-tamagui-starter/core": "*",
     "@tamagui/next-theme": "1.5.17",
     "app": "*",

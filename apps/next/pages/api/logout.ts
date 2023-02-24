@@ -8,7 +8,7 @@ import type { User } from "pages/api/user";
 export default withIronSessionApiRoute(logoutRoute, sessionOptions);
 
 function logoutRoute(req: NextApiRequest, res: NextApiResponse<User>) {
-  console.log(`logoutRoute: ${JSON.stringify(req.session)}`)
+  // console.log(`logoutRoute: ${JSON.stringify(req.session)}`);
   req.session.destroy();
-  res.redirect('/')
+  res.redirect("/");
 }

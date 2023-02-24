@@ -2,7 +2,7 @@
 import 'expo-dev-client'
 import React from 'react'
 import { NativeNavigation } from 'app/navigation/native'
-import {LoginScreen} from 'app/features/login/screen'
+import {LoginScreen} from 'app/features/auth/login'
 import { Provider } from 'app/provider'
 import { useFonts } from 'expo-font'
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';

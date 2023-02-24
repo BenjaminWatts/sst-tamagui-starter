@@ -17,4 +17,3 @@ declare module "iron-session" {
     user?: User;
   }
 }
-

@@ -1,7 +1,5 @@
-//aps/next/pages/index.tsx
-
-import { HomeScreen } from "app/features/home/screen";
-import { logout } from "lib/auth";
+// apps/next/pages/auth/signup.tsx
+import { DeleteUser } from "app/features/auth";
 import * as c from "lib/auth";
 
 export const getServerSideProps = c.withIronSessionSsr(async function ({
@@ -10,7 +8,7 @@ export const getServerSideProps = c.withIronSessionSsr(async function ({
 }) {
   const authenticated = req.session.user !== undefined;
   if (!authenticated) {
-    res.setHeader("location", "/auth/login");
+    res.setHeader("location", "/");
     res.statusCode = 302;
     res.end();
   }
@@ -20,6 +18,8 @@ export const getServerSideProps = c.withIronSessionSsr(async function ({
 },
 c.sessionOptions);
 
-export const Home: React.FC = () => <HomeScreen logout={logout} />;
+export const DeleteUserPage: React.FC = () => (
+  <DeleteUser provider={c.getCognitoProvider()} onDeleted={() => c.logout()} />
+);
 
-export default Home;
+export default DeleteUserPage;

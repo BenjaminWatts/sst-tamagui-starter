@@ -6,6 +6,14 @@ export function SSTExpoStarterStack({ stack }: StackContext) {
 
   const cognito = new Cognito(stack, "CognitoPool", {
     login: ["email"],
+    cdk: {
+      userPoolClient: {
+        authFlows: {
+          userPassword: true,
+        }
+      }
+    }
+    
   })
 
   const api = new Api(stack, "api", {
@@ -29,6 +37,11 @@ export function SSTExpoStarterStack({ stack }: StackContext) {
     },
     environment: {
       SECRET_COOKIE_PASSWORD, // note must be > 32 chars
+      // COGNITO_CLIENT_ID: cognito.userPoolClientId,
+      // COGNITO_USER_POOL_ID: cognito.userPoolId,
+      NEXT_PUBLIC_AWS_REGION: stack.region,
+      NEXT_PUBLIC_COGNITO_CLIENT_ID: cognito.userPoolClientId,
+      NEXT_PUBLIC_COGNITO_USER_POOL_ID: cognito.userPoolId,
     }
   })
 
