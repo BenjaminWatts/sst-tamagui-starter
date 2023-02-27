@@ -16,9 +16,10 @@ export const Email: React.FC<EmailInputProps> = ({ setEmail }) => {
       <Input
         testID="data-email-input"
         autoComplete="email"
+
         value={value}
         onChange={(e) => {
-          const email = e.nativeEvent.text;
+          const email = e.nativeEvent.text.toLowerCase()
           setValue(email);
           if (validators.email(email)) {
             setEmail(email);

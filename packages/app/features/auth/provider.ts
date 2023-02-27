@@ -9,8 +9,9 @@ import {
   InitiateAuthCommand,
   ResendConfirmationCodeCommand,
   SignUpCommand,
-} from "@aws-sdk/client-cognito-identity-provider"; // ES Modules import
+} from "@aws-sdk/client-cognito-identity-provider"; // ES Modules import 
 import * as t from "./types.provider";
+
 
 // const AuthFlow = "USER_PASSWORD_AUTH";
 
@@ -68,10 +69,11 @@ export const login = async ({
     AuthFlow: 'USER_PASSWORD_AUTH',
     AuthParameters: {
       USERNAME: request.Username,
-      EMAIL: request.Username,
+      EMAIL: request.Username.toLowerCase(),
       PASSWORD: request.Password,
     },
   });
+  // console.log(command)
   try {
     const res = await client(clientProvider).send(command);
     const { ChallengeName } = res;
@@ -95,6 +97,7 @@ export const login = async ({
     if (!RefreshToken) {
       throw Error("No RefreshToken returned by AWS Cognito");
     }
+    // console.log('login response', res)
     return {
       AccessToken,
       IdToken,

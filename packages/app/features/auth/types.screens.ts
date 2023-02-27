@@ -17,11 +17,17 @@ export type ConfirmSignupScreenProps = BaseAuthScrenProps & {
   // provider: p.ConfirmSignUpArgs
 };
 
-export type LoginScreenProps = BaseAuthScrenProps & {
-  onToken: (result: { 
+export type OnTokenResult = { 
+  response: {
     AccessToken: string;
-    IdToken: string
-  }) => void;
+    IdToken: string;
+  }
+  email: string;
+  password: string;
+}
+
+export type LoginScreenProps = BaseAuthScrenProps & {
+  onToken: (result: OnTokenResult) => void;
   toForgotPassword: () => void;
   toRegister: () => void;
   // provider: p.LoginArgs

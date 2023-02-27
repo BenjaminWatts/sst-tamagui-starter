@@ -21,7 +21,7 @@ export const AuthScreenLayout: React.FC<LoginScreenProps> = ({ children, title }
           width={'100%'}
         >
         <YStack
-          width={400}
+          maxWidth={400}
           ai="center"
           >
           {children}

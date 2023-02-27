@@ -19,7 +19,7 @@ export const getServerSideProps = c.withIronSessionSsr(async function ({
 c.sessionOptions);
 
 const nav = (url: string) => {
-     if(typeof window !== "undefined") window.location.replace(url)
+    if(typeof window !== "undefined") window.location.replace(url)
 
 }
 

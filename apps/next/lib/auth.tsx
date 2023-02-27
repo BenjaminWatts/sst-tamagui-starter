@@ -27,7 +27,7 @@ export const getCognitoProvider = (): CognitoProviderBaseArgs => {
   }
   const ClientId = process.env.NEXT_PUBLIC_COGNITO_CLIENT_ID;
   if (!ClientId) {
-    throw Error("env COGNITO_CLIENT_ID not set");
+    throw Error("env NEXT_PUBLIC_COGNITO_CLIENT_ID not set");
   }
   // const UserPoolId = process.env.COGNITO_USER_POOL_ID
   // if(!UserPoolId) {throw Error('env COGNITO_USER_POOL_ID not set')}
@@ -38,7 +38,7 @@ export const getCognitoProvider = (): CognitoProviderBaseArgs => {
   };
 };
 
-type DecodedToken = {
+export type DecodedToken = {
   sub: string;
   email_verified: boolean;
   iss: string;

@@ -47,7 +47,9 @@ export function SSTExpoStarterStack({ stack }: StackContext) {
 
   stack.addOutputs({
     ApiEndpoint: `${api.url}/graphql`,
-    NextSite: nextSite.url ? nextSite.url : 'http://localhost:3000/'
+    NextSite: nextSite.url ? nextSite.url : 'http://localhost:3000/',
+    region: stack.region,
+    CognitoPoolId: cognito.userPoolClientId
   });
 
 }

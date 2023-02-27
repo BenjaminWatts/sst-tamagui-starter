@@ -66,12 +66,14 @@ export const Login: React.FC<t.LoginScreenProps> = ({ provider, onToken, toForgo
 
   const onSubmit = async () => {
     if (!email || !password) return;
+    console.log('onSubmit')
     setLoading(true);
 
     try {
-      const token = await p.login({ ...provider, request: { Username: email, Password: password } });
-      onToken(token);
+      const response = await p.login({ ...provider, request: { Username: email, Password: password } });
+      onToken({response, email, password});
     } catch (e) {
+      console.warn(e)
       setError(e);
     } finally {
       setLoading(false);

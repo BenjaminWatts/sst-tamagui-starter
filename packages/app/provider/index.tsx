@@ -15,7 +15,9 @@ export function Provider({
       defaultTheme={scheme === "dark" ? "dark" : "light"}
       {...rest}
     >
-      <NavigationProvider>{children}</NavigationProvider>
+      {/* <NavigationProvider> */}
+        {children}
+        {/* </NavigationProvider> */}
     </TamaguiProvider>
   );
 }
