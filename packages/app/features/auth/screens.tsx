@@ -6,7 +6,6 @@ import * as p from './provider';
 import { Separator, Text, YStack, XGroup } from '@my/ui';
 import * as fields from './fields';
 import * as validators from './validators';
-import { YGroup } from 'tamagui'
 
 
 const yStackStyles = {width: '100%', space: 3}
