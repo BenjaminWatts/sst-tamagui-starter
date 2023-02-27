@@ -145,7 +145,12 @@ export const confirmForgotPassword = async ({
   request,
   ClientId,
 }: t.ConfirmForgotPasswordArgs): Promise<t.ConfirmForgotPasswordResponse> => {
-  const command = new ConfirmForgotPasswordCommand({ ...request, ClientId });
+  const command = new ConfirmForgotPasswordCommand({
+    ConfirmationCode: String(request.ConfirmationCode),
+    Password: request.Password,
+    Username: request.Username,
+    ClientId 
+  });
 
   try {
     await client(clientProvider).send(command);

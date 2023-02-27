@@ -1,7 +1,8 @@
 import React from "react";
 import { Input, Label } from "@my/ui";
-import { validate } from "email-validator";
+// import { validate } from "email-validator";
 import * as labels from "./labels";
+import * as validators from "./validators";
 
 type EmailInputProps = {
   setEmail: (email: string | undefined) => void;
@@ -13,13 +14,13 @@ export const Email: React.FC<EmailInputProps> = ({ setEmail }) => {
     <>
       <labels.Email />
       <Input
-        testID="email"
+        testID="data-email-input"
         autoComplete="email"
         value={value}
         onChange={(e) => {
           const email = e.nativeEvent.text;
           setValue(email);
-          if (validate(email)) {
+          if (validators.email(email)) {
             setEmail(email);
           } else {
             setEmail(undefined)
@@ -36,11 +37,6 @@ type PasswordProps = {
   // autoComplete: "password-new" | "password";
 };
 
-const isValidPassword = (pwd: string) => {
-  const pattern =
-    /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[\^$*.[\]{}()?"!@#%&/\\,><':;|_~`=+\- ])[A-Za-z0-9^$*.[\]{}()?"!@#%&/\\,><':;|_~`=+\- ]{8,256}$/;
-  return pattern.test(pwd);
-};
 
 export const Password: React.FC<PasswordProps> = ({
   // autoComplete,
@@ -52,33 +48,29 @@ export const Password: React.FC<PasswordProps> = ({
     <>
       <labels.Password isNew={isNew} />
       <Input
-        testID="password"
+        testID="data-password-input"
         autoComplete={isNew ? 'password-new' : 'password'}
         secureTextEntry={true}
         value={value}        
         onChange={(e) => {
           const pwd = e.nativeEvent.text;
           setValue(pwd);
-          if (isValidPassword(pwd)) {
+          if (validators.password(pwd)) {
             setPassword(pwd);
           } else {
             setPassword(undefined)
           }
         }}
       />
-      {value && !isValidPassword(value) && <Label color={'red'}>Invalid Password</Label>}
+      {value && !validators.password(value) && <Label color={'red'}>Invalid Password</Label>}
     </>
   );
 };
 
-const isValidCode = (code: string) => {
-  const asNumber = Number(code)
-  console.log( asNumber.toLocaleString().length)
-  return asNumber.toFixed().length === 6
-};
+
 
 type CodeInputProps = {
-  setCode: (x: number| undefined) => void;
+  setCode: (x: string| undefined) => void;
 };
 
 export const Code: React.FC<CodeInputProps> = ({ setCode }) => {
@@ -87,10 +79,11 @@ export const Code: React.FC<CodeInputProps> = ({ setCode }) => {
     <>
       <labels.Code />
       <Input
+        testID="data-code-input"
         value={value}
         onChangeText={(x) => {
           setValue(x);
-          if (isValidCode(x)) {
+          if (validators.code(x)) {
             console.log('setting code')
             setCode(x);
           } else {

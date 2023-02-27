@@ -1,6 +1,5 @@
 import React from "react";
-import { Input, Label } from "@my/ui";
-import { validate } from "email-validator";
+import { Label } from "@my/ui";
 
 const labels = {
   email: "Email",
@@ -9,8 +8,8 @@ const labels = {
   code: "Confirmation Code",
 };
 
-export const Email = () => <Label testID="email-label">{labels.email}</Label>;
+export const Email = () => <Label testID="data-email-label">{labels.email}</Label>;
 export const Password = (props: {isNew: boolean}) => (
-  <Label testID="password-label">{props.isNew ? labels.newPassword: labels.password}</Label>
+  <Label testID="data-password-label">{props.isNew ? labels.newPassword: labels.password}</Label>
 );
-export const Code = () => <Label testID="code-label">{labels.code}</Label>;
+export const Code = () => <Label testID="data-code-label">{labels.code}</Label>;

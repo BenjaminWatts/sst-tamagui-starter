@@ -56,7 +56,7 @@ export type ForgotPasswordResponse = {
 export type ConfirmForgotPasswordArgs = CognitoProviderBaseArgs & {
   request: {
     Username: string;
-    ConfirmationCode: number;
+    ConfirmationCode: string;
     Password: string; // the new password
   };
 };
