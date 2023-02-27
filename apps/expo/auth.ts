@@ -53,8 +53,9 @@ export const loadCreds = async(): Promise<EmailPassword> => {
 
 export const loadToken = async(): Promise<string> => {
     const stored = await SecureStore.getItemAsync(tokenKey)
+    // console.log(stored)
     if(!stored) throw new Error('No stored token')
-    return JSON.parse(stored)
+    return stored
 }
 
 export const attemptLogin = async (options: EmailPassword) => {
@@ -100,17 +101,19 @@ export type DecodedToken = {
   
   }
 
+// const region = process.env.AWS_REGION
+
 export const verifyToken = async (raw_token: string, tokenType: 'id' | 'access') => {
     console.log('verifyToken', raw_token, tokenType)
 
-    const region = process.env.NEXT_PUBLIC_AWS_REGION
-    if(!region) {throw Error('env NEXT_PUBLIC_AWS_REGION not set')}
+
+    if(!region) {throw Error('env AWS_REGION not set')}
   
     const userPoolId = process.env.NEXT_PUBLIC_COGNITO_USER_POOL_ID
     if(!userPoolId) {throw Error('env NEXT_PUBLIC_COGNITO_USER_POOL_ID not set')}
   
-    const appClientId = process.env.NEXT_PUBLIC_COGNITO_CLIENT_ID
-    if(!appClientId) {throw Error('env NEXT_PUBLIC_COGNITO_CLIENT_ID not set')}
+    // const appClientId = process.env.NEXT_PUBLIC_COGNITO_CLIENT_ID
+    if(!ClientId) {throw Error('env NEXT_PUBLIC_COGNITO_CLIENT_ID not set')}
 
     const { decode } = require("react-native-pure-jwt")
 
@@ -136,9 +139,10 @@ export const verifyToken = async (raw_token: string, tokenType: 'id' | 'access')
   }
 
 export const checkAuth = async () : Promise<boolean> => {
+    console.log('checkAuth')
     try {
         const token = await loadToken()
-        console.log({token})
+        console.log(token)
         await verifyToken(token, 'id')
         return true
     } catch(e) {
@@ -150,14 +154,14 @@ export const checkAuth = async () : Promise<boolean> => {
 
 export const useIsAuthenticated = () => {
     const [authenticated, setIsAuthenticated] = React.useState(false)
+    const check = async () => {
+        const result = await checkAuth()
+        setIsAuthenticated(result)
+    }
     React.useEffect(() => {
-        const check = async () => {
-            const result = await checkAuth()
-            setIsAuthenticated(result)
-        }
-        check()
-    }, [])
-    return {authenticated, setIsAuthenticated}
+        if(!authenticated) { check()}
+    }, [authenticated])
+    return {authenticated, setIsAuthenticated, check}
 }
 
 
