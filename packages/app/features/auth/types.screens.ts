@@ -9,11 +9,13 @@ type BaseAuthScrenProps = {
 export type SignUpScreenProps = BaseAuthScrenProps & {
   toConfirm: () => void;
   toForgotPassword: () => void;
+  toBack: () => void;
   // provider: p.SignUpArgs;
 };
 
 export type ConfirmSignupScreenProps = BaseAuthScrenProps & {
   toLogin: () => void;
+  toBack: () => void;
   // provider: p.ConfirmSignUpArgs
 };
 
@@ -37,15 +39,18 @@ export type ForgotPasswordScreenProps = BaseAuthScrenProps & {
   toConfirmForgotPassword: () => void;
   toRegister: () => void;
   toConfirmSignup: () => void;
+  toBack: () => void;
   // provider: p.ForgotPasswordArgs
 };
 
 export type ConfirmForgotPasswordProps = BaseAuthScrenProps & {
   toLogin: () => void;
+  toBack: () => void;
   // provider: p.ConfirmForgotPasswordArgs
 };
 
 export type DeleteUserScreenProps = BaseAuthScrenProps & {
   onDeleted: () => void;
+  toBack: () => void;
   // provider: p.DeleteUserArgs
 };

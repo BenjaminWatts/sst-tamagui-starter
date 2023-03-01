@@ -10,24 +10,25 @@ type LoginScreenProps = {
 
 export const AuthScreenLayout: React.FC<LoginScreenProps> = ({ children, title }) => {
   return (
-    <YStack
-      jc="center"
-      flex={1}
-      space
-      >
-      <H1 ta="center">{title}</H1>
-        <XStack
-          jc="center"
-          width={'100%'}
+    // <YStack height='100%'>
+    <XStack flex={1} jc='center' ai='center'  >
+      <YStack
+        maxWidth={500}
+        jc="center"
+        ai='center'
+        flex={1}
+        space
         >
-        <YStack
-          maxWidth={400}
-          ai="center"
-          >
-          {children}
-        </YStack>
-        </XStack>
+        <H1 ta="center">{title}</H1>
 
-    </YStack>
+          <YStack
+            width="90%"
+            >
+            {children}
+          </YStack>
+
+      </YStack>
+    </XStack>
+    // </YStack>
   );
 };

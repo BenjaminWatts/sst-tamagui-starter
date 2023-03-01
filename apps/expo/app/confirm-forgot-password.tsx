@@ -7,6 +7,7 @@ export default function ConfirmForgotPasswordScreen() {
   const router = useRouter();
   return (
     <ConfirmForgotPassword
+      toBack={() => router.replace(routes.forgotPassword)}
       provider={getCognitoProvider()}
       toLogin={() => router.replace(routes.login)}
     />

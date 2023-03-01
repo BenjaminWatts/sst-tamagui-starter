@@ -101,6 +101,7 @@ export type DecodedToken = {
 };
 
 // const region = process.env.AWS_REGION
+const userPoolId = process.env.NEXT_PUBLIC_COGNITO_USER_POOL_ID;
 
 export const verifyToken = async (
   raw_token: string,
@@ -112,7 +113,7 @@ export const verifyToken = async (
     throw Error("env AWS_REGION not set");
   }
 
-  const userPoolId = process.env.NEXT_PUBLIC_COGNITO_USER_POOL_ID;
+
   if (!userPoolId) {
     throw Error("env NEXT_PUBLIC_COGNITO_USER_POOL_ID not set");
   }

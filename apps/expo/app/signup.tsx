@@ -8,6 +8,7 @@ export default function SignupScreen() {
   return (
     <Signup
       provider={getCognitoProvider()}
+      toBack={() => router.replace(routes.login)}
       toForgotPassword={() => router.replace(routes.forgotPassword)}
       toConfirm={() => router.replace(routes.confirmSignup)}
     />

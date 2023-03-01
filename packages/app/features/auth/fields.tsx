@@ -16,6 +16,7 @@ export const Email: React.FC<EmailInputProps> = ({ setEmail }) => {
       <Input
         testID="data-email-input"
         autoComplete="email"
+        // width='100%'
 
         value={value}
         onChange={(e) => {
@@ -84,10 +85,17 @@ export const Code: React.FC<CodeInputProps> = ({ setCode }) => {
         value={value}
         onChangeText={(x) => {
           setValue(x);
+          // console.log(x)
           if (validators.code(x)) {
-            console.log('setting code')
-            setCode(x);
+            console.log('setting code ' + x)
+            var myformat = new Intl.NumberFormat('en-GB', { 
+              minimumIntegerDigits: 6,
+              
+            })
+            const formatted = myformat.format(Number(x)).replace(',', '')
+            setCode(formatted);
           } else {
+            console.log('not valid')
             setCode(undefined)
           }
         }}

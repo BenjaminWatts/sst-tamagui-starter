@@ -2,9 +2,7 @@ export  { validate as email} from "email-validator";
 
 
 export const code = (code: string | Number) => {
-    const asNumber = Number(code)
-    console.log( asNumber.toLocaleString().length)
-    return asNumber.toFixed().length === 6
+    return code.toString().length === 6 && Number(code)
   };
 
 

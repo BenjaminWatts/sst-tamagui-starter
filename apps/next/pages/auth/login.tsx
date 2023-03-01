@@ -31,7 +31,7 @@ export const LoginPage: React.FC = () => (
     onToken={async (result) => {
       
       c.exchangeToken({
-        token: result.IdToken,
+        token: result.response.IdToken,
         redirect: "/",
       });
     }}

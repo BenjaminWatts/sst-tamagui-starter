@@ -25,6 +25,7 @@ const nav = (url: string) => {
 export const SignupPage: React.FC = () => (
   <Signup
     provider={c.getCognitoProvider()}
+    toBack={() => nav("/")}
     toForgotPassword={() => nav("/auth/forgotpassword")}
     toConfirm={() => nav("/auth/confirmsignup")}
   />

@@ -9,14 +9,21 @@ type ActionButtonProps = {
 
 // const commonProps = {width: '100%'}
 
+export const Back: React.FC<ActionButtonProps> = ({ onPress }) => (
+  <Button flex={1} size="$3" onPress={onPress} testID="back-button">
+    Back
+  </Button>
+);
+
 export const Register: React.FC<ActionButtonProps> = ({ onPress }) => (
-  <Button size="$3" onPress={onPress} testID="register-button">
+  <Button flex={1} size="$3" onPress={onPress} testID="register-button">
     Register
   </Button>
 );
 
 export const Delete: React.FC<ActionButtonProps> = ({ onPress }) => (
   <Button 
+  flex={1} 
     color='$red'
     size="$3" 
     onPress={onPress} 
@@ -26,8 +33,8 @@ export const Delete: React.FC<ActionButtonProps> = ({ onPress }) => (
 );
 
 export const ForgotPassword: React.FC<ActionButtonProps> = ({ onPress }) => (
-  <Button size="$3" onPress={onPress} testID="forgot-password-button">
-    Forgot Password
+  <Button flex={1} size="$3" onPress={onPress} testID="forgot-password-button">
+    Forgot
   </Button>
 );
 
@@ -36,6 +43,7 @@ export const ForgotPassword: React.FC<ActionButtonProps> = ({ onPress }) => (
 export const Confirm = (props: ActionButtonProps) => (
   <Button
   size="$3" 
+  flex={1} 
     icon={props.loading ? <Spinner /> : undefined}
     {...props} testID="confirm-button">
     Confirm
@@ -43,7 +51,7 @@ export const Confirm = (props: ActionButtonProps) => (
 );
 
 export const Reminder: React.FC<ActionButtonProps> = ({ onPress }) => (
-  <Button size="$3"  onPress={onPress} testID="request-reminder-button">
+  <Button size="$3" flex={1}  onPress={onPress} testID="request-reminder-button">
     Request Reminder
   </Button>
 );

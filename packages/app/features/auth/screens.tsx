@@ -22,7 +22,7 @@ const useEmailAndPassword = (): [string | undefined, string | undefined, (email:
   return [email, password, setEmailValue, setPasswordValue];
 };
 
-export const Signup: React.FC<t.SignUpScreenProps> = ({ toConfirm, provider, toForgotPassword }) => {
+export const Signup: React.FC<t.SignUpScreenProps> = ({ toConfirm, provider, toForgotPassword, toBack }) => {
   const [email, password, setEmail, setPassword] = useEmailAndPassword();
   const [error, setError] = useState<Error>();
   const [loading, setLoading] = useState(false);
@@ -44,17 +44,17 @@ export const Signup: React.FC<t.SignUpScreenProps> = ({ toConfirm, provider, toF
 
   return (
     <Layout title='Register'>
-      <YStack style={yStackStyles}>
         <fields.Email setEmail={setEmail} />
         <fields.Password isNew={false} setPassword={setPassword} />
         <FieldButtonSeparator/>
         {error && <Text color="red">{error.message}</Text>}
 
-        <XGroup size="$3" >
+        <XGroup size="$3" width='100%' jc={'space-around'} >
+          <buttons.Back onPress={toBack} disabled={false} loading={loading} />
+
           <buttons.Confirm disabled={disabled} onPress={onSubmit} loading={loading} />
           <buttons.ForgotPassword onPress={toForgotPassword} loading={false} disabled={false} />
         </XGroup>
-      </YStack>
     </Layout>
   );
 };
@@ -66,9 +66,7 @@ export const Login: React.FC<t.LoginScreenProps> = ({ provider, onToken, toForgo
 
   const onSubmit = async () => {
     if (!email || !password) return;
-    console.log('onSubmit')
     setLoading(true);
-
     try {
       const response = await p.login({ ...provider, request: { Username: email, Password: password } });
       onToken({response, email, password});
@@ -82,17 +80,15 @@ export const Login: React.FC<t.LoginScreenProps> = ({ provider, onToken, toForgo
 
   return (
     <Layout title='Login'>
-      <YStack style={yStackStyles}>
       <fields.Email setEmail={setEmail} />
       <fields.Password isNew={false} setPassword={setPassword} />
       <FieldButtonSeparator/>
       {error && <Text color="red">{error.message}</Text>}
       <XGroup size="$3" >
-          <buttons.Confirm onPress={onSubmit} disabled={false} loading={loading} />
+        <buttons.Confirm onPress={onSubmit} disabled={false} loading={loading} />
         <buttons.ForgotPassword onPress={toForgotPassword} disabled={false} loading={false} />
         <buttons.Register onPress={toRegister} disabled={false} loading={false} />
       </XGroup>
-      </YStack>
     </Layout>
   );
 };
@@ -101,6 +97,7 @@ export const Login: React.FC<t.LoginScreenProps> = ({ provider, onToken, toForgo
 export const DeleteUser: React.FC<t.DeleteUserScreenProps> = ({
   provider,
   onDeleted,
+  toBack
 }) => {
   const [email, setEmail] = React.useState<string | undefined>();
   const [password, setPassword] = React.useState<string | undefined>();
@@ -130,16 +127,15 @@ export const DeleteUser: React.FC<t.DeleteUserScreenProps> = ({
 
   return (
     <Layout title='Delete Account'>
-      <YStack style={yStackStyles}>
       <fields.Email setEmail={setEmail} />
       <fields.Password isNew={false} setPassword={setPassword} />
       <FieldButtonSeparator/>
       {error && <Text color='red'>{error.message}</Text>}
 
       <XGroup size="$3" >
+        <buttons.Back onPress={toBack} disabled={false} loading={loading} />
         <buttons.Delete disabled={disabled} onPress={onSubmit} loading={loading} />
       </XGroup>
-      </YStack>
     </Layout>
   );
 };
@@ -150,7 +146,8 @@ export const ForgotPassword: React.FC<t.ForgotPasswordScreenProps> = ({
   provider,
   toConfirmForgotPassword,
   toRegister,
-  toConfirmSignup
+  toConfirmSignup,
+  toBack
 }) => {
   const [email, setEmail] = React.useState<string | undefined>();
   const [error, setError] = React.useState<Error | undefined>(undefined);
@@ -177,11 +174,13 @@ export const ForgotPassword: React.FC<t.ForgotPasswordScreenProps> = ({
 
   return (
     <Layout title='Forgot Password'>
-      <YStack style={yStackStyles}>
+
         <fields.Email setEmail={setEmail} />
         <FieldButtonSeparator/>
         {error && <Text color='red'>{error.message}</Text>}
-        <XGroup size="$3" >
+        <XGroup size="$3" style={{width: '100%'}}>
+        <buttons.Back onPress={toBack} disabled={false} loading={loading} />
+
           <buttons.Confirm
             loading={loading}
             disabled={disabled}
@@ -191,7 +190,7 @@ export const ForgotPassword: React.FC<t.ForgotPasswordScreenProps> = ({
             disabled={false}
             onPress={toRegister} />
         </XGroup>
-      </YStack>
+
     </Layout>
   );
 };
@@ -201,6 +200,7 @@ export const ForgotPassword: React.FC<t.ForgotPasswordScreenProps> = ({
 export const ConfirmSignup: React.FC<t.ConfirmSignupScreenProps> = ({
   provider,
   toLogin,
+  toBack
 }) => {
   const [email, setEmail] = React.useState<string | undefined>();
   const [code, setCode] = React.useState<string | undefined>();
@@ -227,16 +227,18 @@ export const ConfirmSignup: React.FC<t.ConfirmSignupScreenProps> = ({
 
   return (
     <Layout title='Verify email'>
-      <YStack style={yStackStyles}>
+
       <fields.Email setEmail={setEmail}/>
       <fields.Code setCode={setCode} />
       <FieldButtonSeparator/>
       {error && <Text color='red'>{error.message}</Text>}
 
       <XGroup size="$3" >
+      <buttons.Back onPress={toBack} disabled={false} loading={loading} />
+
         <buttons.Confirm onPress={onSubmit} disabled={disabled} loading={loading}/>
         </XGroup>
-      </YStack>
+
     </Layout>
   );
 };
@@ -244,6 +246,7 @@ export const ConfirmSignup: React.FC<t.ConfirmSignupScreenProps> = ({
 export const ConfirmForgotPassword: React.FC<t.ConfirmForgotPasswordProps> = ({
   toLogin,
   provider,
+  toBack
 }) => {
   const [email, setEmail] = React.useState<string | undefined>();
   const [code, setCode] = React.useState<string | undefined>();
@@ -251,8 +254,8 @@ export const ConfirmForgotPassword: React.FC<t.ConfirmForgotPasswordProps> = ({
   const [error, setError] = React.useState<Error | undefined>(undefined);
   const [loading, setLoading] = React.useState(false);
   const disabled = !email || !code || !password || !validators.email(email) || !validators.code(code) || !validators.password(password)
-
   const onSubmit = async () => {
+    
     if(!email || !code || !password) return;
     try {
       setLoading(true);
@@ -260,7 +263,7 @@ export const ConfirmForgotPassword: React.FC<t.ConfirmForgotPasswordProps> = ({
         ...provider,
         request: {
           Username: email,
-          ConfirmationCode,
+          ConfirmationCode: code,
           Password: password,
         },
       });
@@ -274,20 +277,22 @@ export const ConfirmForgotPassword: React.FC<t.ConfirmForgotPasswordProps> = ({
 
   return (
     <Layout title='Change Password'>
-      <YStack style={yStackStyles}>
+
       <fields.Email setEmail={setEmail}/>
       <fields.Password isNew={false} setPassword={setPassword} />
       <fields.Code setCode={setCode} />
       <FieldButtonSeparator/>
       {error && <Text color='red'>{error.message}</Text>}
       <XGroup size="$3" >
+      <buttons.Back onPress={toBack} disabled={false} loading={loading} />
+
 
       <buttons.Confirm
         disabled={disabled}
         loading={loading} 
         onPress={onSubmit} />
       </XGroup>
-      </YStack>
+
     </Layout>
   );
 };

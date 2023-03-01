@@ -1,6 +1,6 @@
 export const login = '/'
 export const confirmForgotPassword = '/confirm-forgot-password'
 export const forgotPassword = '/forgot-password'
-export const register = '/register'
+// export const register = '/register'
 export const signup = '/signup'
 export const confirmSignup = '/confirm-signup'

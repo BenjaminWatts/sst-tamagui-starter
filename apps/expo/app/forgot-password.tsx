@@ -8,8 +8,10 @@ export default function ForgotPasswordScreen() {
   return (
     <ForgotPassword
       provider={getCognitoProvider()}
+      toBack={() => router.replace(routes.login)}
+
       toConfirmForgotPassword={() => router.replace(routes.confirmForgotPassword)}
-      toRegister={() => router.replace(routes.register)}
+      toRegister={() => router.replace(routes.signup)}
       toConfirmSignup={() => router.replace(routes.confirmSignup)}
     />
   );

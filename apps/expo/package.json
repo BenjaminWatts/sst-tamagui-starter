@@ -51,6 +51,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.17.9",
+    "@babel/plugin-proposal-export-namespace-from": "^7.18.9",
     "@babel/preset-typescript": "^7.21.0",
     "@expo/metro-config": "^0.3.21",
     "@tamagui/babel-plugin": "1.5.17",
