@@ -1,15 +1,44 @@
+fragment Todo on Todo {
+    todo_id
+    title
+    text
+}
 
+fragment TodosResponse on TodosResponse {
+    last_id
+    todos {
+        ...Todo
+    }
+}
 
-query RecentPosts {
-    recentPosts {
-        id
-        title
-        text
-        category
-        author {
-            id
-            name
-            thumbnail
-        }
+query Todos {
+    todos {
+        ...TodosResponse
+    }
+}
+
+mutation TodoCreate($input: TodoCreate!) {
+    todoCreate(
+        input: $input
+    )  {
+        todo_id
+        completed
+    }
+}
+
+mutation TodoComplete($todo_id: ID!) {
+    todoComplete(
+        todo_id: $todo_id
+    ) {
+        todo_id
+        completed
+    }
+}
+
+mutation TodoDelete($todo_id: ID!) {
+    todoDelete(
+        todo_id: $todo_id
+    ) {
+        todo_id
     }
 }

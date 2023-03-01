@@ -13,7 +13,15 @@
     "vitest": "^0.28.5"
   },
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.281.0",
+    "@aws-sdk/util-dynamodb": "^3.282.0",
     "graphql": "^16.6.0",
     "sst": "^2.0.33"
+  },
+  "workspaces": {
+    "nohoist": [
+      "@aws-sdk/client-dynamodb",
+      "@aws-sdk/util-dynamodb"
+    ]
   }
 }

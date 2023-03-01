@@ -1,6 +1,17 @@
-import { StackContext, Api, NextjsSite, Cognito } from "sst/constructs";
+import { StackContext, Api, NextjsSite, Cognito, Table } from "sst/constructs";
 
 export function SSTExpoStarterStack({ stack }: StackContext) {
+
+  const todos_table = new Table(stack, 'todos', {
+    primaryIndex: {
+      partitionKey: 'user_id',
+      sortKey: 'todo_id'
+    },
+    fields: {
+      user_id: 'string',
+      todo_id: 'string'
+    }
+  })
 
   require('dotenv').config({ path: '.env' })
 
@@ -22,7 +33,16 @@ export function SSTExpoStarterStack({ stack }: StackContext) {
       "GET /": "packages/functions/src/lambda.handler",
       "ANY /graphql": "packages/functions/src/apollo.handler",
     },
+    defaults: {
+      function: {
+        environment: {
+          TODOS_TABLE: todos_table.tableName
+        }
+      }
+    }
   });
+
+  api.attachPermissions([todos_table])
 
   const {SECRET_COOKIE_PASSWORD} = process.env
   if(!SECRET_COOKIE_PASSWORD) throw new Error('SECRET_COOKIE_PASSWORD not set in .env file')

@@ -18,6 +18,7 @@
     },
     "scripts": {
         "generate": "graphql-codegen",
+        "watch": "graphql-codegen -w",
         "prestart": "yarn generate",
         "predev": "yarn generate"
     }
