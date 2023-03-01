@@ -35,7 +35,7 @@ function MyApp({ Component, pageProps }: SolitoAppProps) {
   );
 }
 
-function ThemeProvider({ children }: { children: React.ReactNode }) {
+export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useRootTheme();
 
   return (

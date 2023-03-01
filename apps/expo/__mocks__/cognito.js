@@ -1,0 +1,1 @@
+jest.mock('@aws-sdk/client-cognito-identity-provider')

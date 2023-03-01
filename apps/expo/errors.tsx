@@ -1,3 +1,3 @@
 export const onError = (error: Error) => {
-    console.log({error})
-}
+  console.log({ error });
+};

@@ -1,3 +1,3 @@
-import config from 'app/tamagui.config'
+import config from "app/tamagui.config";
 
-export default config
+export default config;
