@@ -1,6 +1,12 @@
-import { StackContext, Api, NextjsSite, Cognito, Table } from "sst/constructs";
+import { StackContext, Api, NextjsSite, Cognito, Table, AppSyncApi } from "sst/constructs";
 
 export function SSTExpoStarterStack({ stack }: StackContext) {
+
+  const appsyncDir = 'packages/functions/src/appsync'
+
+
+
+
 
   const todos_table = new Table(stack, 'todos', {
     primaryIndex: {
@@ -12,6 +18,30 @@ export function SSTExpoStarterStack({ stack }: StackContext) {
       todo_id: 'string'
     }
   })
+
+  const defaults = {
+    function: {
+      environment: {
+        TODOS_TABLE: todos_table.tableName
+      },
+
+    }
+  }
+
+  const appSync = new AppSyncApi(stack, 'appsync', {
+    schema: 'packages/schema/schema/main.graphql',
+    resolvers: {
+      "Query todos": `${appsyncDir}/Query.todos`,
+      "Mutation todoCreate": `${appsyncDir}/Mutation.todoCreate`,
+      "Mutation todoComplete": `${appsyncDir}/Mutation.todoComplete`,
+      "Mutation todoDelete": `${appsyncDir}/Mutation.todoDelete`,
+    },
+    defaults
+  })
+
+  appSync.bind([todos_table])
+
+  
 
   require('dotenv').config({ path: '.env' })
 
@@ -33,13 +63,7 @@ export function SSTExpoStarterStack({ stack }: StackContext) {
       "GET /": "packages/functions/src/lambda.handler",
       "ANY /graphql": "packages/functions/src/apollo.handler",
     },
-    defaults: {
-      function: {
-        environment: {
-          TODOS_TABLE: todos_table.tableName
-        }
-      }
-    }
+    defaults
   });
 
   api.attachPermissions([todos_table])

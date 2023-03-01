@@ -8,7 +8,7 @@ if(!TableName) {throw Error(`missing env TODOS_TABLE`)}
 
 const client = new DynamoDBClient({region: process.env.AWS_REGION})
 
-type TodoQuery = {user_id: string; last_id? : string}
+type TodoQuery = {user_id: string; last_id : string | null}
 
 type UpdateTodoOptions = g.MutationTodoCompleteArgs & {user_id: string}
 export const todo = {
